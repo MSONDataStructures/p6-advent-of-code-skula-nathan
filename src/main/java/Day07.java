@@ -13,6 +13,7 @@ public class Day07 {
         //System.out.print(part2(in));
     }
 
+    // Nathan's Part
     public static long part1I(In in) {
         while (in.hasNextLine()) {
             String lineIn = in.readLine();
@@ -21,11 +22,36 @@ public class Day07 {
         return 0;
     }
 
+    // Skula's Part
     public static long part1R(In in) {
+        long sum = 0;
         while (in.hasNextLine()) {
-            String lineIn = in.readLine();
-            // TODO: the magic happens here...recursively
+            String[] parts = in.readLine().split(": ");
+            long target = Long.parseLong(parts[0]);
+            String[] numbers = parts[1].split(" ");
+            long[] nums = new long[numbers.length];
+            for (int i = 0; i < numbers.length; i++) {
+                nums[i] = Long.parseLong(numbers[i]);
+            }
+            if (canMakeTarget(nums, target, 0, nums[0])) {
+                sum += target;
+            }
         }
-        return 0;
+        return sum;
+    }
+
+    private static boolean canMakeTarget(long[] nums, long target, int index, long current) {
+        // Base case: if we've processed all numbers except the last one
+        if (index == nums.length - 1) {
+            return current == target;
+        }
+
+        // Try addition
+        if (canMakeTarget(nums, target, index + 1, current + nums[index + 1])) {
+            return true;
+        }
+
+        // Try multiplication
+        return canMakeTarget(nums, target, index + 1, current * nums[index + 1]);
     }
 }
