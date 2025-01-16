@@ -32,13 +32,13 @@ public class Day07 {
         }
         return sum;
     }
-    //commit
+
     public static boolean canMakeTargetIteratively(long[] nums, long target) {
         for (long i = 0; i < Math.pow(2,nums.length-1); i++) {
 
             long result = nums[0];
             for (int j = 1; j < nums.length; j++) {
-                if((i % Math.pow(2,j)) / Math.pow(2,j-1) == 0) {
+                if((i % (int)(Math.pow(2,j))) / (int)(Math.pow(2,j-1)) == 0) {
                     result += nums[j];
                 } else {
                     result *= nums[j];
