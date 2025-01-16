@@ -35,4 +35,11 @@ public class Day07Test {
         In testIn = new In("./input_files/day07p1.txt");
         assertEquals(1582598718861L, Day07.part1R(testIn));
     }
+
+    // Extra Tests
+    @Test
+    public void testExamplePart2() {
+        In testIn = new In("./input_files/day07ex.txt");
+        assertEquals(11387, Day07.part2(testIn));
+    }
 }
