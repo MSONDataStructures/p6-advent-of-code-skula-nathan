@@ -1,4 +1,5 @@
 import edu.princeton.cs.algs4.In;
+import java.lang.Math;
 
 public class Day07 {
 
@@ -15,11 +16,39 @@ public class Day07 {
 
     // Nathan's Part
     public static long part1I(In in) {
+        long sum = 0;
         while (in.hasNextLine()) {
-            String lineIn = in.readLine();
-            // TODO: the magic happens here...iteratively
+            String[] parts = in.readLine().split(": ");
+            long target = Long.parseLong(parts[0]);
+            String[] numbers = parts[1].split(" ");
+            long[] nums = new long[numbers.length];
+            for (int i = 0; i < numbers.length; i++) {
+                nums[i] = Long.parseLong(numbers[i]);
+            }
+            if (canMakeTargetIteratively(nums, target)) {
+                sum += target;
+            }
         }
-        return 0;
+        return sum;
+    }
+
+    public static boolean canMakeTargetIteratively(long[] nums, long target) {
+        for (long i = 0; i < Math.pow(2,nums.length-1); i++) {
+
+            long result = nums[0];
+            for (int j = 1; j < nums.length; j++) {
+                if((i % Math.pow(2,j)) / Math.pow(2,j-1) == 0) {
+                    result += nums[j];
+                } else {
+                    result *= nums[j];
+                }
+
+            }
+            if (result == target) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Skula's Part
