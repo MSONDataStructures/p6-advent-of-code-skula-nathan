@@ -31,7 +31,7 @@ public class Day07 {
         }
         return sum;
     }
-
+    //commit
     public static boolean canMakeTargetIteratively(long[] nums, long target) {
         for (long i = 0; i < Math.pow(2,nums.length-1); i++) {
 
